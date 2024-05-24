@@ -60,11 +60,20 @@ function App() {
   };
   const handleAcction = () => {
     // generar rutas
-    const ayacentes = [];
-    for (let i = 0; i < 4; i++) {
-      ayacentes.push(getAdyacentes(posicion, i));
+    let completado = false;
+    let mapa = [];
+    while (!completado) {
+      const ayacentes = [];
+      for (let i = 0; i < 4; i++) {
+        let nodo = getAdyacentes(posicion, i);
+        nodo.canGo === 0 &&
+          !visitados.includes(nodo.posicion) &&
+          ayacentes.push(nodo);
+        setVisitados([...visitados, nodo.posicion]);
+      }
+      console.log(ayacentes.length === 0);
     }
-    console.log(ayacentes);
+    console.log(mapa);
   };
   return (
     <div>
